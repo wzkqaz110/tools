@@ -116,14 +116,12 @@ wget -q -N --no-check-certificate \
      https://github.com/wzkqaz110/tools/releases/download/v0.1/XrayR-linux.zip \
 || { echo "下载失败，请检查网络"; exit 1; }
 
-    fi
-
     unzip XrayR-linux.zip
     rm XrayR-linux.zip -f
     chmod +x XrayR
     mkdir /etc/XrayR/ -p
     rm /etc/systemd/system/XrayR.service -f
-    file="hhttps://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/xrayr/XrayR.service"
+    file="https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/xrayr/XrayR.service"
     wget -q -N --no-check-certificate -O /etc/systemd/system/XrayR.service ${file}
     #cp -f XrayR.service /etc/systemd/system/
     systemctl daemon-reload
