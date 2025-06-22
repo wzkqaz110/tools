@@ -116,6 +116,18 @@ wget -q -N --no-check-certificate \
      https://github.com/wzkqaz110/tools/releases/download/v0.1/XrayR-linux.zip \
 || { echo "下载失败，请检查网络"; exit 1; }
 
+echo "正在下载 geoip.dat"
+wget -q -N --no-check-certificate \
+     -O /usr/local/XrayR/geoip.dat \
+     https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat \
+|| { echo "下载失败，请检查网络"; exit 1; }
+
+echo "正在下载 geosite.dat"
+wget -q -N --no-check-certificate \
+     -O /usr/local/XrayR/geosite.dat \
+     https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat \
+|| { echo "下载失败，请检查网络"; exit 1; }
+
     unzip XrayR-linux.zip
     rm XrayR-linux.zip -f
     chmod +x XrayR
