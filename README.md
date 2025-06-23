@@ -16,10 +16,10 @@
 
 ## 📦 快速开始
 
-| # | 功能 | 一键命令 |
-|---|------|---------|
-| 1 | **更改 SSH 端口** | ```bash<br>wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/change_ssh_port.sh && bash change_ssh_port.sh<br>``` |
-| 2 | **安装 XrayR** | ```bash<br>wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/xrayr/install.sh && bash install.sh<br>``` |
+| # | 功能             | 一键命令 |
+|---|------------------|---------|
+| 1 | **更改 SSH 端口** | `wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/change_ssh_port.sh && bash change_ssh_port.sh` |
+| 2 | **安装 XrayR**   | `wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/xrayr/install.sh && bash install.sh` |
 
 > **提示**：脚本默认在 `/root` 执行；若需其他目录，请自行 `cd` 之后再运行。
 
