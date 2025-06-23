@@ -2,8 +2,13 @@
 
 1. 更改ssh端口
 一键命令：
-
 ```
 wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/change_ssh_port.sh && bash change_ssh_port.sh
+```
+
+2. xrayr
+一键命令：
+```
+wget -N https://raw.githubusercontent.com/wzkqaz110/tools/refs/heads/main/xrayr/install.sh && bash install.sh
 ```
 
