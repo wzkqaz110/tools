@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 用法：sudo ./change_ssh_port.sh 012345678901234567890123456789
+# 用法：sudo ./change_ssh_port.sh 0123456789012345678901234567890
 set -euo pipefail
 
 NEW_PORT="${1:-}"
