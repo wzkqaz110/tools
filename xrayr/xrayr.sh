@@ -96,7 +96,6 @@ uninstall() {
     echo "请根据实际需求完善卸载逻辑"
 }
 
-# 设置自动更新计划任务函数
 setup_cron() {
     echo -e "${yellow}是否添加自动更新数据库的计划任务？(y/n)${plain}"
     read -r answer
@@ -107,7 +106,6 @@ setup_cron() {
             time_input="03:00"
         fi
 
-        # 验证时间格式 HH:MM
         if ! [[ $time_input =~ ^([01]?[0-9]|2[0-3]):[0-5][0-9]$ ]]; then
             echo -e "${red}时间格式错误，自动使用默认时间 03:00${plain}"
             time_input="03:00"
@@ -116,13 +114,10 @@ setup_cron() {
         hour=${time_input%%:*}
         minute=${time_input##*:}
 
-        # 计划任务命令，调用本脚本的 update-db 功能
         cron_cmd="/bin/bash $(realpath "$0") update-db >/dev/null 2>&1"
 
-        # 先删除已有相同任务，避免重复
         crontab -l 2>/dev/null | grep -v -F "$cron_cmd" | crontab -
 
-        # 添加新的计划任务
         (crontab -l 2>/dev/null; echo "$minute $hour * * * $cron_cmd") | crontab -
 
         echo -e "${green}计划任务添加成功！每天 $time_input 自动更新数据库。${plain}"
@@ -146,61 +141,44 @@ update_database() {
 
     echo -e "${green}数据库更新完成！${plain}"
 
-    # 询问是否添加自动更新计划任务
     setup_cron
 }
 
-show_help() {
-    echo "XrayR 管理脚本，支持以下命令："
-    echo "  start         启动 XrayR"
-    echo "  stop          停止 XrayR"
-    echo "  restart       重启 XrayR"
-    echo "  status        查看 XrayR 状态"
-    echo "  enable        设置 XrayR 开机自启"
-    echo "  disable       取消 XrayR 开机自启"
-    echo "  log           查看 XrayR 日志"
-    echo "  update-db     更新 geoip.dat 和 geosite.dat 数据库，并可添加自动更新计划"
-    echo "  install       安装 XrayR"
-    echo "  uninstall     卸载 XrayR"
-    echo "  version       查看脚本版本"
-    echo "  help          显示帮助信息"
+show_menu() {
+    echo -e "${green}========== XrayR 管理脚本 ==========${plain}"
+    echo "1) 启动 XrayR"
+    echo "2) 停止 XrayR"
+    echo "3) 重启 XrayR"
+    echo "4) 查看 XrayR 状态"
+    echo "5) 设置开机自启"
+    echo "6) 取消开机自启"
+    echo "7) 查看日志"
+    echo "8) 更新 geoip.dat 和 geosite.dat 数据库"
+    echo "9) 安装 XrayR"
+    echo "10) 卸载 XrayR"
+    echo "11) 查看脚本版本"
+    echo "0) 退出"
+    echo -e "${green}==================================${plain}"
 }
 
-case "$1" in
-    start)
-        start
-        ;;
-    stop)
-        stop
-        ;;
-    restart)
-        restart
-        ;;
-    status)
-        status
-        ;;
-    enable)
-        enable
-        ;;
-    disable)
-        disable
-        ;;
-    log)
-        log
-        ;;
-    update-db)
-        update_database
-        ;;
-    install)
-        install
-        ;;
-    uninstall)
-        uninstall
-        ;;
-    version)
-        version
-        ;;
-    help|*)
-        show_help
-        ;;
-esac
+while true; do
+    show_menu
+    read -rp "请输入数字选择操作: " choice
+    case $choice in
+        1) start ;;
+        2) stop ;;
+        3) restart ;;
+        4) status ;;
+        5) enable ;;
+        6) disable ;;
+        7) log ;;
+        8) update_database ;;
+        9) install ;;
+        10) uninstall ;;
+        11) version ;;
+        0) echo "退出脚本."; exit 0 ;;
+        *) echo -e "${red}无效输入，请输入有效数字。${plain}" ;;
+    esac
+    echo
+    read -rp "按回车键返回菜单..."
+done
